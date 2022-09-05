@@ -40,6 +40,12 @@ MONGODB_URL=mongodb://localhost/student-management-db
 $ npm install
 ```
 
+If having package installation issue, consider below
+
+```bash
+$ npm install --force
+```
+
 ## Running the app
 
 ```bash
