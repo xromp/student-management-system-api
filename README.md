@@ -1,6 +1,4 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+<h2 align="center">Student Managemet System APIs</h2>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
@@ -26,6 +24,16 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Prerequisite
+
+Create an .env file in the root project directory with the following property. Change the values based on the config needed.
+
+```
+JWT_SECRET=SECRET
+SALT=10
+MONGODB_URL=mongodb://localhost/student-management-db
+```
+
 ## Installation
 
 ```bash
@@ -43,6 +51,22 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+```
+
+## Dummy users for initial login
+
+#### For administrator:
+
+```
+Username: admin
+Password: password
+```
+
+#### For teacher:
+
+```
+Username: teacher
+Password: password
 ```
 
 ## Test

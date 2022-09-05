@@ -6,6 +6,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { UserDto } from './dto/user.dto';
+import { Role } from '../role/role.enum';
 
 @Injectable()
 export class UserService {
@@ -16,6 +17,16 @@ export class UserService {
       passwordHash: await this.getHashPassword(password),
     });
     return createdUser.save();
+  }
+
+  async bulkInsert(users: CreateUserDto[]) {
+    const createUsers = await Promise.all(
+      users.map(async ({ password, ...user }) => ({
+        ...user,
+        passwordHash: await this.getHashPassword(password),
+      })),
+    );
+    return this.userModel.insertMany(createUsers);
   }
 
   find(userQry: UserDto) {
@@ -41,5 +52,23 @@ export class UserService {
   async getHashPassword(password) {
     const salt = await bcrypt.genSalt(+process.env.SALT);
     return await bcrypt.hash(password, salt);
+  }
+
+  async seedInitialUser() {
+    const users: CreateUserDto[] = [
+      {
+        userName: 'admin',
+        password: 'password',
+        role: Role.Administrator,
+      },
+      {
+        userName: 'teacher',
+        password: 'password',
+        role: Role.Teacher,
+      },
+    ];
+    const hasUser = await this.findOne({});
+    if (!hasUser) this.bulkInsert(users);
+    return true;
   }
 }

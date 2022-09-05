@@ -6,10 +6,4 @@ export class CreateStudentDto {
 
   @IsNotEmpty()
   lastName: string;
-
-  @IsNotEmpty()
-  @IsEnum(Role, {
-    message: `Role must be either 'teacher' or 'administrator'.`,
-  })
-  role: Role;
 }

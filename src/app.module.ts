@@ -17,7 +17,7 @@ import { ErrorsInterceptor } from './interceptors/errors.interceptor';
     UserModule,
     ExamModule,
     AuthModule,
-    MongooseModule.forRoot('mongodb://localhost/nest'),
+    MongooseModule.forRoot(process.env.MONGODB_URL),
   ],
   controllers: [AppController],
   providers: [
