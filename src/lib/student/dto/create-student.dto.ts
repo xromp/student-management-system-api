@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, IsEnum } from 'class-validator';
-import { Role } from 'src/role/role.enum';
+import { Role } from 'src/lib/role/role.enum';
 export class CreateStudentDto {
   @IsNotEmpty()
   firstName: string;

@@ -11,8 +11,8 @@ import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 import { AssignExam } from './dto/assign-exam.dto';
-import { Roles } from 'src/role/role.decorator';
-import { Role } from 'src/role/role.enum';
+import { Roles } from 'src/lib/role/role.decorator';
+import { Role } from 'src/lib/role/role.enum';
 
 @Controller('student')
 export class StudentController {

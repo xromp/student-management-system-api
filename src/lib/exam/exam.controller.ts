@@ -10,8 +10,8 @@ import {
 import { ExamService } from './exam.service';
 import { CreateExamDto } from './dto/create-exam.dto';
 import { UpdateExamDto } from './dto/update-exam.dto';
-import { Roles } from 'src/role/role.decorator';
-import { Role } from 'src/role/role.enum';
+import { Roles } from 'src/lib/role/role.decorator';
+import { Role } from 'src/lib/role/role.enum';
 
 @Controller('exam')
 export class ExamController {
