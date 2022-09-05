@@ -1,26 +1,40 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
-
+import { Student, StudentDocument } from './entities/student.entity';
+const mongoose = require('mongoose');
 @Injectable()
 export class StudentService {
+  constructor(
+    @InjectModel(Student.name) private studentModel: Model<StudentDocument>,
+  ) {}
   create(createStudentDto: CreateStudentDto) {
-    return 'This action adds a new student';
+    const createdStudent = new this.studentModel(createStudentDto);
+    return createdStudent.save();
   }
 
   findAll() {
-    return `This action returns all student`;
+    return this.studentModel.find().populate('exam');
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} student`;
+  findOne(id: string) {
+    return this.studentModel.findById(id).populate('exam');
   }
 
-  update(id: number, updateStudentDto: UpdateStudentDto) {
-    return `This action updates a #${id} student`;
+  update(_id: string, updateStudentDto: UpdateStudentDto) {
+    return this.studentModel.updateOne({ _id }, updateStudentDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} student`;
+  remove(_id: string) {
+    return this.studentModel.remove({ _id });
+  }
+
+  assignExam(studentId, examId) {
+    return this.studentModel.updateOne(
+      { _id: studentId },
+      { $push: { exam: examId } },
+    );
   }
 }

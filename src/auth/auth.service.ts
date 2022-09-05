@@ -21,7 +21,6 @@ export class AuthService {
       );
       if (isPasswordMatch) {
         const { passwordHash, ...result } = account.toObject();
-        console.log({ result });
         return result;
       }
     }
@@ -31,6 +30,7 @@ export class AuthService {
   async login(currentUser: any) {
     const payload = {
       sub: currentUser,
+      roles: [currentUser?.role],
     };
     return {
       authToken: this.jwtService.sign(payload),
